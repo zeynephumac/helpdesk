@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Locked Accounts</h1>
+    <ul>
+        {% for user in locked_users %}
+            <li>
+                {{ user.username }}
+                <a href="{% url 'activate-account' user.id %}" class="btn btn-success">Activate Account</a>
+                <br><br><br>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

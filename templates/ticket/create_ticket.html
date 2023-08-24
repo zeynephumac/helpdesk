@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Create A Ticket</h5>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Issue Title</label>
+                    <select name="{{ form.title.name }}" class="form-select">
+                        <option value="" selected disabled>Select an issue title</option>
+                        <option value="The Computer Won’t Start">The Computer Won’t Start.</option>
+                        <option value="The Screen is Blank">The Screen is Blank</option>
+                        <option value="Abnormally Functioning Operating System or Software">Abnormally Functioning
+                            Operating System or Software</option>
+                        <option value="The Screen is Frozen">The Screen is Frozen</option>
+                        <option value="Strange Noises">Strange Noises</option>
+                        <option value="Overheating">Overheating</option>
+                        <option value="Dropped Internet Connections">Dropped Internet Connections</option>
+                        {% for title in form.title.field.queryset %}
+                        <option value="{{ title.pk }}">{{ title.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="examppleInputPassword1" class="form-label">Description</label>
+                    {% render_field form.description class="form-control" %}
+                </div>
+
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
